@@ -1,14 +1,22 @@
 use std::{
-    fs::File,
-    io::{self, BufRead, BufReader},
+    fs,
     path::Path,
 };
 
-pub fn read_lines(filename: impl AsRef<Path>) -> Vec<String> {
-    let file = File::open(filename).expect("No File Found");
-    let buf = BufReader::new(file);
-    buf.lines()
-        .map(|line| line.expect("could not parse line"))
-        .collect()
+use crate::Data;
 
+pub fn read_lines_into_data(filename: impl AsRef<Path>) -> Vec<Data> {
+    fs::read_to_string(filename)
+        .expect("File not found")
+        .lines()
+        .map(|s| s.parse::<Data>().unwrap())
+        .collect()
+}
+
+pub fn read_lines_into_string(filename: impl AsRef<Path>) -> Vec<String> {
+    fs::read_to_string(filename)
+        .expect("File not found")
+        .lines()
+        .map(|s| s.parse().unwrap())
+        .collect()
 }
