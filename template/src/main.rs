@@ -18,11 +18,12 @@ fn main() {
     //part2();
 }
 
+
 fn part1() {
     let data = read_lines_into_data("input");
 
     for line in data {
-
+        
     }
 }
 
