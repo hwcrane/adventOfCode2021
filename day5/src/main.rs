@@ -16,7 +16,7 @@ pub struct Data {
 }
 
 fn main() {
-    //part1();
+    part1();
     part2();
 }
 
@@ -103,9 +103,7 @@ fn get_cordinates2(data: Data) -> Vec<(u32, u32)>{
             y += direction.1;
         }
         points.push((x.try_into().unwrap(), y.try_into().unwrap()));
-
     }
-    
     points
 }
 
