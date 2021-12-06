@@ -8,6 +8,8 @@ use std::{
     fs,
     path::Path,
 };
+use std::time::{Duration, Instant};
+
 
 #[derive(Debug, Recap, Deserialize)]
 #[recap(regex=r#"(?P<item1>\S+)\s(?P<item2>\S+)"#)]
@@ -17,8 +19,19 @@ pub struct Data {
 }
 
 fn main() {
+    let fish: Vec<u32> = fs::read_to_string("input")
+        .expect("File not found")
+        .trim()
+        .split(",")
+        .map(|f| f.parse().unwrap())
+        .collect();
+    let start = Instant::now();
     //part1();
-    part2();
+
+    part2(fish);
+    let duration = start.elapsed();
+    println!("Time elapsed is: {:?}", duration);
+
 }
 
 
@@ -49,13 +62,8 @@ fn part1() {
 
 }
 
-fn part2() {
-    let fish: Vec<u32> = fs::read_to_string("input")
-        .expect("File not found")
-        .trim()
-        .split(",")
-        .map(|f| f.parse().unwrap())
-        .collect();
+fn part2(fish: Vec<u32>) {
+    
     
     let mut num_of_fish:[u128; 9] = [0;9];
     for f in fish{
