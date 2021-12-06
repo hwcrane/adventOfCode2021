@@ -64,7 +64,6 @@ fn part1() {
 
 fn part2(fish: Vec<u32>) {
     
-    
     let mut num_of_fish:[u128; 9] = [0;9];
     for f in fish{
         num_of_fish[f as usize] += 1;
