@@ -1,6 +1,6 @@
 mod load_data;
 use load_data::*;
-
+use std::collections::HashMap;
 extern crate recap;
 use recap::Recap;
 use serde::Deserialize;
@@ -71,46 +71,29 @@ fn part1() {
 fn get_cordinates2(data: Data) -> Vec<(u32, u32)>{
 
     let mut points: Vec<(u32, u32)> = vec!();
-    // if horesontal
-    if data.xstart == data.xend{
-        let ystart = u32::min(data.ystart, data.yend);
-        let yend = u32::max(data.ystart, data.yend);
-        for y in ystart..(yend + 1){
-            points.push((data.xstart, y))
-        }
-    }
+    
+    let direction: (i32, i32) = 
+    (if data.xstart == data.xend {0} else if data.xstart > data.xend {-1} else {1}, 
+        if data.ystart == data.yend {0} else if data.ystart > data.yend {-1} else {1});
+    
+    let mut x: i32 = data.xstart as i32;
+    let mut y: i32 = data.ystart as i32;
 
-    // if vertical
-    else if data.ystart == data.yend{
-        let xstart = u32::min(data.xstart, data.xend);
-        let xend = u32::max(data.xstart, data.xend);
-        for x in xstart..(xend + 1){
-            points.push((x, data.ystart))
-        }
-    }
-
-    else {
-        let direction: (i32, i32) = 
-        (if data.xstart > data.xend {-1} else {1}, 
-        if data.ystart > data.yend {-1} else {1});
-        
-        let mut x: i32 = data.xstart as i32;
-        let mut y: i32 = data.ystart as i32;
-
-        while (x, y) != (data.xend as i32, data.yend as i32) {
-            points.push((x.try_into().unwrap(), y.try_into().unwrap()));
-            x += direction.0;
-            y += direction.1;
-        }
+    while (x, y) != (data.xend as i32, data.yend as i32) {
         points.push((x.try_into().unwrap(), y.try_into().unwrap()));
+        x += direction.0;
+        y += direction.1;
     }
+    points.push((x.try_into().unwrap(), y.try_into().unwrap()));
+    
     points
 }
 
-fn part2() {
+fn part2() {    
+    let mut grid = [0; 1000000];
+
     let data = read_lines_into_data("input");
 
-    let mut grid = [0; 1000000];
 
     for data in data{
         let points = get_cordinates2(data);
