@@ -7,7 +7,7 @@ fn main() {
     part1();
     part2();
     let duration = start.elapsed();
-    println!("Time elapsed is: {:?}", duration);//part1();
+    println!("Time elapsed is: {:?}", duration);
 }
 
 
