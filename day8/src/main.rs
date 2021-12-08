@@ -35,40 +35,23 @@ fn part1() {
 
 fn string_to_hashset(string: String) -> HashSet<char>{
     let mut set = HashSet::new();
-    for letter in string.chars(){
-        set.insert(letter);
-    }
+    for letter in string.chars(){ set.insert(letter); }
     set
 }
 
 fn get_number(num: &HashSet<char>, one: &HashSet<char>, four: &HashSet<char>) -> u32{
     match num.len() {
-        2 => 1,
-        3 => 7,
-        4 => 4,
-        7 => 8,
-
+        2 => 1, 3 => 7, 4 => 4, 7 => 8,
         5 => {
-            if num.intersection(&four).count() == 2{
-                2
-            } else if num.intersection(&one).count() == 2 {
-                3
-            } else {
-                5
-            }
+            if num.intersection(&four).count() == 2 { 2 } 
+            else if num.intersection(&one).count() == 2 { 3 } 
+            else { 5 }
         }
-
         6 => {
-            if num.intersection(&four).count() == 4 {
-                9
-            } else if num.intersection(&one).count() == 2{
-                0
-            }
-            else {
-                6
-            }
+            if num.intersection(&four).count() == 4 { 9 } 
+            else if num.intersection(&one).count() == 2{ 0 }
+            else { 6 }
         }
-
         _ => 10
     }
 }
