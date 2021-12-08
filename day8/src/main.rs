@@ -1,9 +1,13 @@
 use std::fs;
 use std::collections::HashSet;
+use std::time::Instant;
 
 fn main() {
-    //part1();
+    let start = Instant::now();
+    part1();
     part2();
+    let duration = start.elapsed();
+    println!("Time elapsed is: {:?}", duration);//part1();
 }
 
 

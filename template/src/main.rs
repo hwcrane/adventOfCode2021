@@ -1,4 +1,6 @@
 mod load_data;
+use std::time::Instant;
+
 use load_data::*;
 
 extern crate recap;
@@ -14,8 +16,11 @@ pub struct Data {
 }
 
 fn main() {
+    let start = Instant::now();
     part1();
     //part2();
+    let duration = start.elapsed();
+    println!("Time elapsed is: {:?}", duration);
 }
 
 
