@@ -52,7 +52,7 @@ fn get_number(num: &HashSet<char>, one: &HashSet<char>, four: &HashSet<char>) ->
             else if num.intersection(&one).count() == 2{ 0 }
             else { 6 }
         }
-        _ => 10
+        _ => panic!("invalid number")
     }
 }
 
